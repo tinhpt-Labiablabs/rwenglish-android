@@ -1,18 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_margin="16dp"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:background="#c6211b"
+        android:id="@+id/topComponent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:padding="8dp"
+            android:textSize="24sp"
+            android:textColor="#fff"
+            android:text="this is honor and live component"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_marginTop="12dp"
+        android:background="#454"
+        android:layout_below="@id/topComponent"
+        android:id="@+id/speakComponent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:padding="8dp"
+            android:textSize="24sp"
+            android:textColor="#fff"
+            android:text="this is honor and live component"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <GridView
+        android:id="@+id/flipView"
+        android:layout_marginTop="12dp"
+        android:layout_below="@id/speakComponent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></GridView>
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
