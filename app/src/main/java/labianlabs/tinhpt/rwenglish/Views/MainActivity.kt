@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         addSpeakComponent()
         setAllEvent()
     }
-
     //endregion
 
     //region UTILS
@@ -53,8 +52,8 @@ class MainActivity : AppCompatActivity() {
         val params: RelativeLayout.LayoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT)
         view.layoutParams = params
-        scoreHeartComponent.updateView(45,2)
         scoreHeartContainer.addView(view)
+        updateScoreHeart(0,3)
     }
 
     private fun addSpeakComponent(){
@@ -63,8 +62,8 @@ class MainActivity : AppCompatActivity() {
         val params: RelativeLayout.LayoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT)
         view.layoutParams = params
-        speakComponent.updateView(vocabularies.get(0))
         speakContainer.addView(view)
+        updateDataSpeak(vocabularies.get(0))
     }
 
     private fun setupFlip() {
@@ -89,6 +88,16 @@ class MainActivity : AppCompatActivity() {
 
     //endregion
 
+    //region UPDATE DATA
+    private fun updateScoreHeart(score: Int, heart: Int){
+        scoreHeartComponent.updateView(score,heart)
+    }
+
+    private fun updateDataSpeak(vocabulary: Vocabulary){
+        speakComponent.updateView(vocabulary)
+    }
+    //endregion
+
     //region VIEW EVENT
     private fun setAllEvent(){
         onSpeakAgainClick()
@@ -99,6 +108,9 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this,"on Speak Again",Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun 
+
     //endregion
 
 }
