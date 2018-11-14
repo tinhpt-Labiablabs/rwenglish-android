@@ -7,25 +7,24 @@
 
     <RelativeLayout
         android:layout_alignParentTop="true"
-        android:id="@+id/score_heart_cmp"
+        android:id="@+id/score_heart_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/speak_component"
+        android:id="@+id/speak_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/score_heart_cmp"
-        android:layout_marginTop="12dp">
-
+        android:layout_below="@id/score_heart_container"
+        android:layout_marginTop="16dp">
     </RelativeLayout>
 
-    <GridView
-        android:id="@+id/flipView"
+    <RelativeLayout
+        android:layout_marginTop="16dp"
+        android:id="@+id/flip_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/speak_component"
-        android:layout_marginTop="12dp"></GridView>
+        android:layout_height="match_parent"/>
+
 
 </LinearLayout>

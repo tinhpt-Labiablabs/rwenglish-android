@@ -2,48 +2,47 @@ package labianlabs.tinhpt.rwenglish.Views
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.Gravity
 import android.view.ViewGroup
-import android.widget.GridView
 import android.widget.RelativeLayout
 import android.widget.Toast
-import labianlabs.tinhpt.rwenglish.Adapter.VocabularyAdapter
+import labianlabs.tinhpt.rwenglish.Components.FlipComponent
 import labianlabs.tinhpt.rwenglish.Components.ScoreHeartComponent
 import labianlabs.tinhpt.rwenglish.Components.TextToSpeechComponent
+import labianlabs.tinhpt.rwenglish.Model.FakeData
 import labianlabs.tinhpt.rwenglish.Model.Vocabulary
 import labianlabs.tinhpt.rwenglish.R
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    //endregion
-    private var flipView: GridView? = null
+    //region VARS
     private lateinit var scoreHeartComponent: ScoreHeartComponent
     private lateinit var speakComponent: TextToSpeechComponent
     private lateinit var scoreHeartContainer: RelativeLayout
     private lateinit var speakContainer: RelativeLayout
-    val vocabularies = ArrayList<Vocabulary>()
+    private lateinit var flipContainer: RelativeLayout
+    private lateinit var flipComponent: FlipComponent
+    var vocabularies = ArrayList<Vocabulary>()
     //endregion
-
 
     //region SYSTEM
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initWidget()
+        dataCommonForFlip()
         addHeartView()
-        setupFlip()
-        vrData()
         addSpeakComponent()
+        addFlipComponent()
         setAllEvent()
     }
     //endregion
 
     //region UTILS
     private fun initWidget() {
-        flipView = findViewById(R.id.flipView)
-        scoreHeartContainer = findViewById(R.id.score_heart_cmp)
-        speakContainer = findViewById(R.id.speak_component)
+        scoreHeartContainer = findViewById(R.id.score_heart_container)
+        speakContainer = findViewById(R.id.speak_container)
+        flipContainer = findViewById(R.id.flip_container)
     }
 
     private fun addHeartView() {
@@ -66,29 +65,25 @@ class MainActivity : AppCompatActivity() {
         updateDataSpeak(vocabularies.get(0))
     }
 
-    private fun setupFlip() {
-        val width = resources.displayMetrics.densityDpi
-        flipView!!.columnWidth = width / 4
-        flipView!!.gravity = Gravity.CENTER
-        flipView!!.numColumns = 4
-        flipView!!.horizontalSpacing = 2
-    }
+    private fun addFlipComponent(){
+        flipComponent = FlipComponent(this)
+        val view = flipComponent.createView()
+        val params: RelativeLayout.LayoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT)
+        view.layoutParams = params
+        flipContainer.addView(view)
+        updateDataFlip(this.vocabularies)
 
-    private fun vrData() {
-        for (i in 0..15) {
-            val vocabulary = Vocabulary("Flip", "Lật ngược", 1, R.mipmap.ic_launcher)
-            if (i % 2 == 0) {
-                vocabulary.isDisplayImage = true
-            }
-            vocabularies.add(vocabulary)
-        }
-        val vocabularyAdapter = VocabularyAdapter(vocabularies, this)
-        flipView!!.adapter = vocabularyAdapter
     }
 
     //endregion
 
     //region UPDATE DATA
+    private fun dataCommonForFlip(){
+        val data = FakeData().createDatas()
+        this.vocabularies = data as ArrayList<Vocabulary>
+    }
+
     private fun updateScoreHeart(score: Int, heart: Int){
         scoreHeartComponent.updateView(score,heart)
     }
@@ -96,11 +91,16 @@ class MainActivity : AppCompatActivity() {
     private fun updateDataSpeak(vocabulary: Vocabulary){
         speakComponent.updateView(vocabulary)
     }
+
+    private fun updateDataFlip(vocabularys: List<Vocabulary>){
+        flipComponent.updateView(vocabularys)
+    }
     //endregion
 
     //region VIEW EVENT
     private fun setAllEvent(){
         onSpeakAgainClick()
+        onSelectCorrect()
     }
 
     private fun onSpeakAgainClick(){
@@ -109,8 +109,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun 
-
+    private fun onSelectCorrect(){
+        flipComponent.onSelectedCorrect = {
+            Toast.makeText(this,it.toString(),Toast.LENGTH_SHORT).show()
+        }
+    }
     //endregion
 
 }
