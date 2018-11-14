@@ -1,5 +1,7 @@
 package labianlabs.tinhpt.rwenglish.Views
 
+import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.ViewGroup
@@ -12,6 +14,7 @@ import labianlabs.tinhpt.rwenglish.Model.FakeData
 import labianlabs.tinhpt.rwenglish.Model.Vocabulary
 import labianlabs.tinhpt.rwenglish.R
 import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
@@ -95,6 +98,18 @@ class MainActivity : AppCompatActivity() {
     private fun updateDataFlip(vocabularys: List<Vocabulary>){
         flipComponent.updateView(vocabularys)
     }
+
+
+    private fun removeIfCorrect(id: Int){
+        val temp: ArrayList<Vocabulary> = vocabularies
+          for (i in 0..vocabularies.size -1){
+              if(temp.get(i).idWord == id){
+                  temp.removeAt(i)
+                  break
+              }
+          }
+        updateDataFlip(temp)
+    }
     //endregion
 
     //region VIEW EVENT
@@ -111,7 +126,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun onSelectCorrect(){
         flipComponent.onSelectedCorrect = {
-            Toast.makeText(this,it.toString(),Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Correct",Toast.LENGTH_SHORT).show()
+            removeIfCorrect(it)
         }
     }
     //endregion
