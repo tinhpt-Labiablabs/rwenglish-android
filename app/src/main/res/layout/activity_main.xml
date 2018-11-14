@@ -1,42 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_margin="16dp"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="16dp">
+
     <RelativeLayout
-        android:background="#c6211b"
-        android:id="@+id/topComponent"
+        android:id="@+id/score_heart_cmp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:padding="8dp"
-            android:textSize="24sp"
-            android:textColor="#fff"
-            android:text="this is honor and live component"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
     </RelativeLayout>
+
     <RelativeLayout
-        android:layout_marginTop="12dp"
-        android:background="#454"
-        android:layout_below="@id/topComponent"
         android:id="@+id/speakComponent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/score_heart_cmp"
+        android:layout_marginTop="12dp"
+        android:background="#454">
+
         <TextView
-            android:padding="8dp"
-            android:textSize="24sp"
-            android:textColor="#fff"
-            android:text="this is honor and live component"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="this is honor and live component"
+            android:textColor="#fff"
+            android:textSize="24sp" />
     </RelativeLayout>
 
     <GridView
         android:id="@+id/flipView"
-        android:layout_marginTop="12dp"
-        android:layout_below="@id/speakComponent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></GridView>
+        android:layout_height="match_parent"
+        android:layout_below="@id/speakComponent"
+        android:layout_marginTop="12dp"></GridView>
 
 </RelativeLayout>
