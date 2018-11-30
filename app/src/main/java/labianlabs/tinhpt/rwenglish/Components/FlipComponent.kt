@@ -33,6 +33,7 @@ class FlipComponent(context: Context) : View(context) {
                 currentPosition = position
                 if (currentId != datas.get(position).idWord) {
                     currentId = datas.get(position).idWord
+                    onSelected!!.invoke()
                 } else {
                     onSelectedCorrect!!.invoke(currentId)
                 }
@@ -52,6 +53,7 @@ class FlipComponent(context: Context) : View(context) {
     //region VARS
     private lateinit var _flipView: GridView
     var onSelectedCorrect: ((Int) -> Unit)? = null
+    var onSelected: (()->Unit)? = null
 
     private var currentId = -1
     private var currentPosition = -1

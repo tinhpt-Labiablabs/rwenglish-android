@@ -42,6 +42,7 @@ class FakeData() {
         v11.isDisplayImage = true; v11c.isDisplayImage = false
         v12.isDisplayImage = true; v12c.isDisplayImage = false
 
-        return arrayListOf(v1, v1c, v2, v2c, v3, v3c, v4, v4c, v5, v5c, v6, v6c, v7, v7c, v8, v8c, v9, v9c, v10, v10c, v11, v11c, v12, v12c)
+//        return arrayListOf(v1, v1c, v2, v2c, v3, v3c, v4, v4c, v5, v5c, v6, v6c, v7, v7c, v8, v8c, v9, v9c, v10, v10c, v11, v11c, v12, v12c)
+        return arrayListOf(v1, v1c, v2, v2c, v3, v3c, v4, v4c, v5, v5c, v6, v6c, v7, v7c, v8, v8c, v9, v9c, v10, v10c, v11, v11c,v1c,v1,v2c,v2,v4,v4c)
     }
 }
