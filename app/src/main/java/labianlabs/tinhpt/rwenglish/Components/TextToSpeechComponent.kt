@@ -1,10 +1,11 @@
 package labianlabs.tinhpt.rwenglish.Components
 
 import android.content.Context
+import android.graphics.Color
 import android.speech.tts.TextToSpeech
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
+import android.widget.ImageButton
 import android.widget.RelativeLayout
 import android.widget.TextView
 import labianlabs.tinhpt.rwenglish.Model.Vocabulary
@@ -17,7 +18,8 @@ class TextToSpeechComponent(context: Context) : View(context) {
         val inflater = LayoutInflater.from(context)
         _container = inflater.inflate(R.layout.text_to_speech_component, null) as RelativeLayout
         _mtvLocalText = _container.findViewById(R.id.text_local)
-        _mbtnSpeakAgain = _container.findViewById(R.id.imbtn_speak_again)
+        _mibSpeakAgain = _container.findViewById(R.id.imbtn_speak_again)
+        _mibSpeakAgain.setBackgroundColor(Color.TRANSPARENT)
         setOnSpeakAgainClick()
         setupTextToSpeech()
         return _container
@@ -30,7 +32,7 @@ class TextToSpeechComponent(context: Context) : View(context) {
     }
 
     private fun setOnSpeakAgainClick(){
-        _mbtnSpeakAgain.setOnClickListener {
+        _mibSpeakAgain.setOnClickListener {
             speakText(_currentVocabulary.originWord)
         }
     }
@@ -50,7 +52,7 @@ class TextToSpeechComponent(context: Context) : View(context) {
     //region VARS
     private lateinit var _container: RelativeLayout
     private lateinit var _mtvLocalText: TextView
-    private lateinit var _mbtnSpeakAgain: ImageView
+    private lateinit var _mibSpeakAgain: ImageButton
     private lateinit var _textToSpeech: TextToSpeech
     private lateinit var _currentVocabulary: Vocabulary
 

@@ -4,7 +4,7 @@ import labianlabs.tinhpt.rwenglish.R
 
 class FakeData() {
     fun createDatas(): List<Vocabulary> {
-        var v1 = Vocabulary("Tree", "Cây", 1, R.mipmap.ic_launcher)
+        var v1 = Vocabulary("Tree", "Cây", 1, R.drawable.ic_app_launcher)
         var v1c = Vocabulary("Tree", "Cây", 1, R.mipmap.ic_launcher)
         var v2 = Vocabulary("Laptop", "Máy tính", 2, R.mipmap.ic_launcher)
         var v2c = Vocabulary("Laptop", "Máy tính", 2, R.mipmap.ic_launcher)

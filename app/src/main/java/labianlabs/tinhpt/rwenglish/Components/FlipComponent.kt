@@ -44,10 +44,12 @@ class FlipComponent(context: Context) : View(context) {
 
     private fun commonSetupUI() {
         val width = resources.displayMetrics.densityDpi
-        _flipView!!.columnWidth = width / 4
-        _flipView!!.gravity = Gravity.CENTER
-        _flipView!!.numColumns = 4
-        _flipView!!.horizontalSpacing = 2
+        _flipView.columnWidth = width / 4
+        _flipView.gravity = Gravity.CENTER
+        _flipView.numColumns = 4
+        _flipView.horizontalSpacing = 2
+        _flipView.horizontalSpacing = 16
+        _flipView.verticalSpacing = 16
     }
 
     //region VARS

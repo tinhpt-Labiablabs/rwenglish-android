@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private var scoreAdd: Float = 0.0f
     private var firstTime = true;
     private var currentIndex = 0;
+    private var currentId = 0;
     //endregion
 
     //region SYSTEM
@@ -76,6 +77,7 @@ class MainActivity : AppCompatActivity() {
         view.layoutParams = params
         speakContainer.addView(view)
         updateDataSpeak(vocabularies.get(currentIndex))
+        currentId = vocabularies.get(currentIndex).idWord
     }
 
     private fun addFlipComponent() {
@@ -100,6 +102,7 @@ class MainActivity : AppCompatActivity() {
         updateDataFlip(temp)
         currentIndex++
         updateDataSpeak(temp.get(currentIndex))
+        currentId = temp.get(currentIndex).idWord
     }
 
     private fun scoring() {
@@ -118,7 +121,6 @@ class MainActivity : AppCompatActivity() {
         alDialog.setCancelable(true)
         alDialog.setPositiveButton("Ok",DialogInterface.OnClickListener { dialog, which ->
             dialog.dismiss()
-            finish()
         })
         alDialog.show()
 
@@ -167,8 +169,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun onSelectCorrect() {
         flipComponent.onSelectedCorrect = {
-            scoring()
-            removeIfCorrect(it)
+            if(currentId == it) {
+                scoring()
+                removeIfCorrect(it)
+            }
         }
     }
 

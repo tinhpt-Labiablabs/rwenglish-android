@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    android:layout_margin="16dp">
+    android:layout_margin="16dp">c
 
     <RelativeLayout
         android:layout_alignParentTop="true"
@@ -11,8 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </RelativeLayout>
-
+    <View
+        android:background="#b1b1b1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
     <RelativeLayout
+        android:gravity="center"
         android:id="@+id/speak_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
