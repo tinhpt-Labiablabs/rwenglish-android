@@ -14,7 +14,6 @@ class RewardFinishPopup:AppCompatActivity(){
 
     //endregion
 
-
     //region VARS
 
     //endregion

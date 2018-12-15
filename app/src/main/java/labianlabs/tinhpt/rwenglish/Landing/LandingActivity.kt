@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import labianlabs.tinhpt.rwenglish.R
+import labianlabs.tinhpt.rwenglish.Views.HomeActivity
 import labianlabs.tinhpt.rwenglish.Views.MainActivity
 
 class LandingActivity : AppCompatActivity() {
@@ -16,7 +17,7 @@ class LandingActivity : AppCompatActivity() {
 
     private fun openMain() {
         Handler().postDelayed(Runnable {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, HomeActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             finish()
