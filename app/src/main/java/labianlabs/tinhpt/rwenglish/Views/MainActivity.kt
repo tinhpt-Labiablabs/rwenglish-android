@@ -1,6 +1,7 @@
 package labianlabs.tinhpt.rwenglish.Views
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -13,6 +14,7 @@ import labianlabs.tinhpt.rwenglish.Components.TextToSpeechComponent
 import labianlabs.tinhpt.rwenglish.Model.FakeData
 import labianlabs.tinhpt.rwenglish.Model.Vocabulary
 import labianlabs.tinhpt.rwenglish.R
+import labianlabs.tinhpt.rwenglish.Utils.KeyUtils
 
 class MainActivity : AppCompatActivity() {
 
@@ -65,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         scoreHeartContainer.addView(view)
         updateScoreHeart(0, false)
         scoreHeartComponent.onTimeLeftFinish = {
-           showDialog("Finish Time Left")
+            showDialog("Finish Time Left")
         }
     }
 
@@ -101,8 +103,12 @@ class MainActivity : AppCompatActivity() {
         }
         updateDataFlip(temp)
         currentIndex++
-        updateDataSpeak(temp.get(currentIndex))
-        currentId = temp.get(currentIndex).idWord
+        if (currentIndex < vocabularies.size) {
+            updateDataSpeak(temp.get(currentIndex))
+            currentId = temp.get(currentIndex).idWord
+        } else {
+            openRewardPopup()
+        }
     }
 
     private fun scoring() {
@@ -110,22 +116,29 @@ class MainActivity : AppCompatActivity() {
         if (score < 100) {
             score += scoreAdd;
             updateScoreHeart(score.toInt());
-        }else if(score.toInt() == 100){
+        } else if (score.toInt() == 100) {
             showDialog("Finish Lesson")
         }
     }
 
-    private fun showDialog(message: String){
+    private fun showDialog(message: String) {
         var alDialog = AlertDialog.Builder(this)
         alDialog.setMessage(message)
         alDialog.setCancelable(true)
-        alDialog.setPositiveButton("Ok",DialogInterface.OnClickListener { dialog, which ->
+        alDialog.setPositiveButton("Ok", DialogInterface.OnClickListener { dialog, which ->
             dialog.dismiss()
         })
         alDialog.show()
 
     }
 
+    private fun openRewardPopup() {
+        val intent = Intent(this, RewardFinishPopup::class.java)
+        val bundle = Bundle()
+        bundle.putInt(KeyUtils.SEND_EXP_TO_REWARD_FINISH, score.toInt())
+        intent.putExtra(KeyUtils.PUT_EXP_BUNDLE, bundle)
+        startActivity(intent)
+    }
 
     //endregion
 
@@ -169,7 +182,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun onSelectCorrect() {
         flipComponent.onSelectedCorrect = {
-            if(currentId == it) {
+            if (currentId == it) {
                 scoring()
                 removeIfCorrect(it)
             }
