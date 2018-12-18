@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import labianlabs.tinhpt.rwenglish.R
+import labianlabs.tinhpt.rwenglish.localize
 
 class HomeActivity:AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,6 +14,7 @@ class HomeActivity:AppCompatActivity(){
         mapView()
         onStartClick()
         onExitClick()
+        setupView()
     }
 
     //region VIEW EVENTS
@@ -34,6 +36,10 @@ class HomeActivity:AppCompatActivity(){
     private fun mapView(){
         _btnStart = findViewById(R.id.btn_start)
         _btnExit = findViewById(R.id.btn_exit)
+    }
+    private fun setupView(){
+        _btnStart.text = "Start".localize()
+        _btnExit.text = "Exit".localize()
     }
     //endregion
 

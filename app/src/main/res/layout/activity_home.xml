@@ -48,7 +48,6 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginRight="16dp"
                 android:layout_weight="1"
-                android:text="@string/action_all_start"
                 android:textAllCaps="false"
                 android:textSize="20sp" />
 
@@ -62,7 +61,6 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="32dp"
                 android:layout_weight="1"
-                android:text="@string/action_all_exit"
                 android:textAllCaps="false"
                 android:textSize="20sp" />
         </LinearLayout>
