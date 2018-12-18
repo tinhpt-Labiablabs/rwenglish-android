@@ -7,7 +7,6 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.ViewGroup
 import android.widget.RelativeLayout
-import android.widget.Toast
 import labianlabs.tinhpt.rwenglish.Components.FlipComponent
 import labianlabs.tinhpt.rwenglish.Components.ScoreHeartComponent
 import labianlabs.tinhpt.rwenglish.Components.TextToSpeechComponent
@@ -93,7 +92,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun removeIfCorrect(id: Int) {
+    private fun removeVocabularyIfCorrect(id: Int) {
         val temp: ArrayList<Vocabulary> = vocabularies
         for (i in 0..vocabularies.size - 1) {
             if (temp.get(i).idWord == id && temp.get(i).isDisplayImage) {
@@ -122,7 +121,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showDialog(message: String) {
-        var alDialog = AlertDialog.Builder(this)
+        val alDialog = AlertDialog.Builder(this)
         alDialog.setMessage(message)
         alDialog.setCancelable(true)
         alDialog.setPositiveButton("Ok", DialogInterface.OnClickListener { dialog, which ->
@@ -169,27 +168,20 @@ class MainActivity : AppCompatActivity() {
 
     //region VIEW EVENT
     private fun setAllEvent() {
-//        onSpeakAgainClick()
         onSelectCorrect()
-        onSelect()
-    }
-
-    private fun onSpeakAgainClick() {
-        speakComponent.onSpeakAgainClick = {
-            Toast.makeText(this, "on Speak Again", Toast.LENGTH_SHORT).show()
-        }
+        startTimeLeftWhenFirstSelect()
     }
 
     private fun onSelectCorrect() {
         flipComponent.onSelectedCorrect = {
             if (currentId == it) {
                 scoring()
-                removeIfCorrect(it)
+                removeVocabularyIfCorrect(it)
             }
         }
     }
 
-    private fun onSelect() {
+    private fun startTimeLeftWhenFirstSelect() {
         flipComponent.onSelected = {
             if (firstTime) {
                 scoreHeartComponent.updateView(this.score.toInt(), true)
