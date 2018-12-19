@@ -7,12 +7,14 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.text.Spanned
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import labianlabs.tinhpt.rwenglish.R
 import labianlabs.tinhpt.rwenglish.Utils.KeyUtils
+import labianlabs.tinhpt.rwenglish.localize
 import java.security.Key
 
 class RewardFinishPopup:AppCompatActivity(){
@@ -33,7 +35,9 @@ class RewardFinishPopup:AppCompatActivity(){
     //region VIEW EVENT
     private fun onContinueClick(){
         _btnContinue.setOnClickListener {
-            showDialog("You when exit?")
+//            showDialog("Do you exit?".localize())
+            openHome()
+            finish()
         }
     }
 
@@ -48,10 +52,10 @@ class RewardFinishPopup:AppCompatActivity(){
         var alDialog = AlertDialog.Builder(this)
         alDialog.setMessage(message)
         alDialog.setCancelable(true)
-        alDialog.setPositiveButton("Ok", DialogInterface.OnClickListener { dialog, which ->
+        alDialog.setPositiveButton("OK".localize(), DialogInterface.OnClickListener { dialog, which ->
             openHome()
         })
-        alDialog.setNegativeButton("No",DialogInterface.OnClickListener{dialog, which ->
+        alDialog.setNegativeButton("No".localize(),DialogInterface.OnClickListener{dialog, which ->
             dialog.dismiss()
         })
         alDialog.show()
@@ -71,13 +75,14 @@ class RewardFinishPopup:AppCompatActivity(){
 
     private fun displayUI(){
         _tvEXP.text = "$_exp"
-        _tvMessage.text = String.format("You have been %s exp",_exp)
+        _tvMessage.text = String.format("You have been %d exp".localize(),_exp)
     }
 
     private fun mapView(){
         _tvEXP = findViewById(R.id.text_xp)
         _tvMessage = findViewById(R.id.text_title)
         _btnContinue = findViewById(R.id.btn_continue)
+        _btnContinue.text = "Continue".localize()
     }
     //endregion
 

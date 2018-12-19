@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@drawable/bg_popup_them"
     android:layout_height="match_parent">
 
     <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -35,10 +36,9 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="24dp"
-            android:text="Chuc mung ban da nhan them duoc 30 xp diem"
             android:textAlignment="center"
             android:textColor="#000"
-            android:textSize="18sp"
+            android:textSize="24sp"
             app:layout_constraintTop_toBottomOf="@id/image_title" />
 
         <Button

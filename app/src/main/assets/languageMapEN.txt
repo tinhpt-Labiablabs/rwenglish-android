@@ -1,3 +1,10 @@
 Remember Word English \n The best for you = Remember Word English \n The best for you EN;
 Start = Start;
 Exit = Exit;
+Do you exit? = Do you exit?
+OK = OK;
+No = No;
+Continue = Continue;
+You have been %d exp = You have been %d exp;
+Time up = Time up;
+XP = XP;

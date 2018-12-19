@@ -8,17 +8,18 @@ import android.support.v7.app.AppCompatActivity
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import labianlabs.tinhpt.rwenglish.Components.FlipComponent
-import labianlabs.tinhpt.rwenglish.Components.ScoreHeartComponent
+import labianlabs.tinhpt.rwenglish.Components.InfoPlayComponent
 import labianlabs.tinhpt.rwenglish.Components.TextToSpeechComponent
 import labianlabs.tinhpt.rwenglish.Model.FakeData
 import labianlabs.tinhpt.rwenglish.Model.Vocabulary
 import labianlabs.tinhpt.rwenglish.R
 import labianlabs.tinhpt.rwenglish.Utils.KeyUtils
+import labianlabs.tinhpt.rwenglish.localize
 
 class MainActivity : AppCompatActivity() {
 
     //region VARS
-    private lateinit var scoreHeartComponent: ScoreHeartComponent
+    private lateinit var infoPlayComponent: InfoPlayComponent
     private lateinit var speakComponent: TextToSpeechComponent
     private lateinit var scoreHeartContainer: RelativeLayout
     private lateinit var speakContainer: RelativeLayout
@@ -27,9 +28,9 @@ class MainActivity : AppCompatActivity() {
     var vocabularies = ArrayList<Vocabulary>()
     private var score: Float = 0.0f
     private var scoreAdd: Float = 0.0f
-    private var firstTime = true;
-    private var currentIndex = 0;
-    private var currentId = 0;
+    private var firstTime = true
+    private var currentIndex = 0
+    private var currentId = 0
     //endregion
 
     //region SYSTEM
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         initWidget()
         dataCommonForFlip()
-        addHeartView()
+        addInfoPlayComponent()
         addSpeakComponent()
         addFlipComponent()
         setAllEvent()
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        scoreHeartComponent.removeTimeLeft()
+        infoPlayComponent.removeTimeUp()
     }
     //endregion
 
@@ -57,16 +58,16 @@ class MainActivity : AppCompatActivity() {
         flipContainer = findViewById(R.id.flip_container)
     }
 
-    private fun addHeartView() {
-        scoreHeartComponent = ScoreHeartComponent(this)
-        val view = scoreHeartComponent.createView()
+    private fun addInfoPlayComponent() {
+        infoPlayComponent = InfoPlayComponent(this)
+        val view = infoPlayComponent.createView()
         val params: RelativeLayout.LayoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT)
         view.layoutParams = params
         scoreHeartContainer.addView(view)
-        updateScoreHeart(0, false)
-        scoreHeartComponent.onTimeLeftFinish = {
-            showDialog("Finish Time Left")
+        updateScoreForInfoPlay(0, false)
+        infoPlayComponent.onTimeLeftFinish = {
+            showDialog("Time up".localize())
         }
     }
 
@@ -92,14 +93,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun removeVocabularyIfCorrect(id: Int) {
-        val temp: ArrayList<Vocabulary> = vocabularies
-        for (i in 0..vocabularies.size - 1) {
-            if (temp.get(i).idWord == id && temp.get(i).isDisplayImage) {
-                temp.removeAt(i)
-                break
-            }
-        }
+    private fun updateAllScreen(id: Int) {
+        val temp = removeDataWith(id)
         updateDataFlip(temp)
         currentIndex++
         if (currentIndex < vocabularies.size) {
@@ -110,13 +105,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun removeDataWith(id: Int):List<Vocabulary>{
+        val temp: ArrayList<Vocabulary> = vocabularies
+        for (i in 0..vocabularies.size - 1) {
+            if (temp.get(i).idWord == id && temp.get(i).isDisplayImage) {
+                temp.removeAt(i)
+                break
+            }
+        }
+        return temp
+    }
+
     private fun scoring() {
-        //TODO: update logic
         if (score < 100) {
             score += scoreAdd;
-            updateScoreHeart(score.toInt());
-        } else if (score.toInt() == 100) {
-            showDialog("Finish Lesson")
+            updateScoreForInfoPlay(score.toInt());
         }
     }
 
@@ -124,8 +127,8 @@ class MainActivity : AppCompatActivity() {
         val alDialog = AlertDialog.Builder(this)
         alDialog.setMessage(message)
         alDialog.setCancelable(true)
-        alDialog.setPositiveButton("Ok", DialogInterface.OnClickListener { dialog, which ->
-            dialog.dismiss()
+        alDialog.setPositiveButton("OK".localize(), DialogInterface.OnClickListener { dialog, which ->
+            finish()
         })
         alDialog.show()
 
@@ -136,6 +139,7 @@ class MainActivity : AppCompatActivity() {
         val bundle = Bundle()
         bundle.putInt(KeyUtils.SEND_EXP_TO_REWARD_FINISH, score.toInt())
         intent.putExtra(KeyUtils.PUT_EXP_BUNDLE, bundle)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
 
@@ -148,12 +152,12 @@ class MainActivity : AppCompatActivity() {
         scoreAdd = 100 / (vocabularies.size / 2).toFloat()
     }
 
-    private fun updateScoreHeart(score: Int, isStart: Boolean) {
-        scoreHeartComponent.updateView(score, isStart)
+    private fun updateScoreForInfoPlay(score: Int, isStart: Boolean) {
+        infoPlayComponent.updateView(score, isStart)
     }
 
-    private fun updateScoreHeart(score: Int) {
-        scoreHeartComponent.updateView(score)
+    private fun updateScoreForInfoPlay(score: Int) {
+        infoPlayComponent.updateView(score)
     }
 
     private fun updateDataSpeak(vocabulary: Vocabulary) {
@@ -169,22 +173,22 @@ class MainActivity : AppCompatActivity() {
     //region VIEW EVENT
     private fun setAllEvent() {
         onSelectCorrect()
-        startTimeLeftWhenFirstSelect()
+        startTimeUpCountWhenFirstSelect()
     }
 
     private fun onSelectCorrect() {
         flipComponent.onSelectedCorrect = {
             if (currentId == it) {
                 scoring()
-                removeVocabularyIfCorrect(it)
+                updateAllScreen(it)
             }
         }
     }
 
-    private fun startTimeLeftWhenFirstSelect() {
+    private fun startTimeUpCountWhenFirstSelect() {
         flipComponent.onSelected = {
             if (firstTime) {
-                scoreHeartComponent.updateView(this.score.toInt(), true)
+                infoPlayComponent.updateView(this.score.toInt(), true)
                 firstTime = false
             }
 

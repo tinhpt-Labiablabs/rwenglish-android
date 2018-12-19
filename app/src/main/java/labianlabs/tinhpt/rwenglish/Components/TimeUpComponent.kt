@@ -6,14 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.TextView
 import labianlabs.tinhpt.rwenglish.R
+import labianlabs.tinhpt.rwenglish.localize
 
-class HeartComponent(context: Context) : View(context) {
+class TimeUpComponent(context: Context) : View(context) {
 
     fun createView(): View {
         val inflater: LayoutInflater = LayoutInflater.from(context)
         _view = inflater.inflate(R.layout.heart_number_component,null) as LinearLayout
         _progressTimeLeft = _view.findViewById(R.id.progress_time_left);
+        _tvTimeUp = _view.findViewById(R.id.text_time_up)
+        _tvTimeUp.text = "Time up".localize()
         timeLeft = TimeLeft.makeView(this._progressTimeLeft)
         return _view
     }
@@ -28,11 +32,12 @@ class HeartComponent(context: Context) : View(context) {
         }
     }
 
-    fun removeTimeLeft(){
+    fun removeTimeUp(){
         timeLeft.destroy()
     }
 
     //region VARS
+    private lateinit var _tvTimeUp: TextView
     private lateinit var _view: LinearLayout
     private lateinit var _progressTimeLeft: ProgressBar
     private lateinit var timeLeft: TimeLeft
