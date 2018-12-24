@@ -13,15 +13,18 @@ import labianlabs.tinhpt.rwenglish.R
 
 class VocabularyAdapter(var vocabularies: List<Vocabulary>, var context: Context) : BaseAdapter() {
 
+    //region VARS
     private var viewHolder: ViewHolder? = null
     private val inflater: LayoutInflater
+    //endregion
 
+    //region CONSTRUCTOR
     init {
         inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     }
     //endregion
 
-    //region SYSTEM
+    //region SYSTEM EVENTS
     override fun getCount(): Int {
         return this.vocabularies.size
     }

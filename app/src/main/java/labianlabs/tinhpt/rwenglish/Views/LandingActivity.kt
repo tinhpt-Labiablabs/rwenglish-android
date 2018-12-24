@@ -9,6 +9,7 @@ import labianlabs.tinhpt.rwenglish.R
 import labianlabs.tinhpt.rwenglish.localize
 
 class LandingActivity : AppCompatActivity() {
+    //region SYSTEM EVENTS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_landing)
@@ -16,8 +17,10 @@ class LandingActivity : AppCompatActivity() {
         openMain()
 
     }
+    //endregion
 
-    private fun setupView(){
+    //region UTILS
+    private fun setupView() {
         titleLanding = findViewById(R.id.title_landing)
         titleLanding.text = "Remember Word English \n The best for you".localize()
     }
@@ -30,6 +33,7 @@ class LandingActivity : AppCompatActivity() {
             finish()
         }, 3000)
     }
+    //endregion
 
     //region VARS
     private lateinit var titleLanding: TextView

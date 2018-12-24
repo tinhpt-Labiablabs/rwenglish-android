@@ -2,21 +2,16 @@ package labianlabs.tinhpt.rwenglish.Views
 
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.text.Spanned
 import android.util.Log
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import labianlabs.tinhpt.rwenglish.R
-import labianlabs.tinhpt.rwenglish.Utils.KeyUtils
+import labianlabs.tinhpt.rwenglish.Utils.CommunityKeyUtils
 import labianlabs.tinhpt.rwenglish.localize
-import java.security.Key
 
 class RewardFinishPopup:AppCompatActivity(){
 
@@ -72,9 +67,9 @@ class RewardFinishPopup:AppCompatActivity(){
 
     //region UTILS
     private fun receiveData(){
-        val bundle  = intent.getBundleExtra(KeyUtils.PUT_EXP_BUNDLE)
+        val bundle  = intent.getBundleExtra(CommunityKeyUtils.PUT_EXP_BUNDLE)
         _exp = if(bundle!=null){
-            bundle.getInt(KeyUtils.SEND_EXP_TO_REWARD_FINISH)
+            bundle.getInt(CommunityKeyUtils.SEND_EXP_TO_REWARD_FINISH)
         }else{
             0
         }

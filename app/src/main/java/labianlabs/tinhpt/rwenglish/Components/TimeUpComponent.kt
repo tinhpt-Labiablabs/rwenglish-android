@@ -12,6 +12,7 @@ import labianlabs.tinhpt.rwenglish.localize
 
 class TimeUpComponent(context: Context) : View(context) {
 
+    //region UTILS
     fun createView(): View {
         val inflater: LayoutInflater = LayoutInflater.from(context)
         _view = inflater.inflate(R.layout.heart_number_component,null) as LinearLayout
@@ -35,16 +36,18 @@ class TimeUpComponent(context: Context) : View(context) {
     fun removeTimeUp(){
         timeLeft.destroy()
     }
+    //endregion
 
     //region VARS
     private lateinit var _tvTimeUp: TextView
     private lateinit var _view: LinearLayout
     private lateinit var _progressTimeLeft: ProgressBar
     private lateinit var timeLeft: TimeLeft
-    var onFinishTime:(()->Unit)?= null
 
+    var onFinishTime:(()->Unit)?= null
     //endregion
 
+    //region STATIC INNER CLASS
     class TimeLeft: Runnable{
 
         private lateinit var progress: ProgressBar
@@ -76,4 +79,5 @@ class TimeUpComponent(context: Context) : View(context) {
         }
 
     }
+    //endregion
 }

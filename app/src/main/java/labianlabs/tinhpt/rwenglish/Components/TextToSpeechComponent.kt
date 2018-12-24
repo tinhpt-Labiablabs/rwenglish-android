@@ -14,6 +14,7 @@ import java.util.*
 
 class TextToSpeechComponent(context: Context) : View(context) {
 
+    //region UTILS
     fun createView(): View {
         val inflater = LayoutInflater.from(context)
         _container = inflater.inflate(R.layout.text_to_speech_component, null) as RelativeLayout
@@ -48,6 +49,7 @@ class TextToSpeechComponent(context: Context) : View(context) {
      fun speakText(text: String){
         _textToSpeech.speak(text,TextToSpeech.QUEUE_FLUSH,null)
     }
+    //endregion
 
     //region VARS
     private lateinit var _container: RelativeLayout
@@ -57,4 +59,5 @@ class TextToSpeechComponent(context: Context) : View(context) {
     private lateinit var _currentVocabulary: Vocabulary
 
     var onSpeakAgainClick:(()->Unit)? = null
+    //endregion
 }

@@ -9,6 +9,8 @@ import labianlabs.tinhpt.rwenglish.R
 import labianlabs.tinhpt.rwenglish.localize
 
 class InfoPlayComponent(context: Context) : View(context) {
+
+    //region UTILS
     fun createView(): View {
         val inflater = LayoutInflater.from(context)
         view = inflater.inflate(R.layout.score_heart_component, null) as RelativeLayout
@@ -29,17 +31,18 @@ class InfoPlayComponent(context: Context) : View(context) {
     }
 
     fun updateView(score: Int, isStart: Boolean) {
-        _mtvScore.text = score.toString() + " XP".localize()
+        _mtvScore.text = score.toString() + " " + "XP".localize()
         _timeUpComponent.updateView(isStart)
     }
 
     fun updateView(score: Int) {
-        _mtvScore.text = score.toString() + " XP".localize()
+        _mtvScore.text = score.toString() + " " + "XP".localize()
     }
 
-    fun removeTimeUp(){
+    fun removeTimeUp() {
         _timeUpComponent.removeTimeUp()
     }
+    //endregion
 
     //region VARS
     private lateinit var view: RelativeLayout

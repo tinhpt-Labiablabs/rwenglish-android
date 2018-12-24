@@ -12,6 +12,7 @@ import labianlabs.tinhpt.rwenglish.R
 
 class FlipComponent(context: Context) : View(context) {
 
+    //region UTILS
     fun createView(): View {
         val inflater = LayoutInflater.from(context)
         _flipView = inflater.inflate(R.layout.flip_component, null) as GridView
@@ -53,11 +54,13 @@ class FlipComponent(context: Context) : View(context) {
         _flipView.verticalSpacing = 16
     }
 
+    //endregion
+
     //region VARS
-    private lateinit var _flipView: GridView
     var onSelectedCorrect: ((Int) -> Unit)? = null
     var onSelected: (()->Unit)? = null
 
+    private lateinit var _flipView: GridView
     private var currentId = -1
     private var currentPosition = -1
     private lateinit var datas: ArrayList<Vocabulary>

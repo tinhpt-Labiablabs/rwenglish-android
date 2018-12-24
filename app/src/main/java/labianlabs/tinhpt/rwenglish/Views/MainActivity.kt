@@ -13,7 +13,7 @@ import labianlabs.tinhpt.rwenglish.Components.TextToSpeechComponent
 import labianlabs.tinhpt.rwenglish.Model.FakeData
 import labianlabs.tinhpt.rwenglish.Model.Vocabulary
 import labianlabs.tinhpt.rwenglish.R
-import labianlabs.tinhpt.rwenglish.Utils.KeyUtils
+import labianlabs.tinhpt.rwenglish.Utils.CommunityKeyUtils
 import labianlabs.tinhpt.rwenglish.localize
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var speakContainer: RelativeLayout
     private lateinit var flipContainer: RelativeLayout
     private lateinit var flipComponent: FlipComponent
-    var vocabularies = ArrayList<Vocabulary>()
+    private var vocabularies = ArrayList<Vocabulary>()
     private var score: Float = 0.0f
     private var scoreAdd: Float = 0.0f
     private var firstTime = true
@@ -49,9 +49,13 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         infoPlayComponent.removeTimeUp()
     }
+
+    override fun onBackPressed() {
+        showDialog("Do you want exit?".localize())
+    }
     //endregion
 
-    //region UTILS
+    //region PRIVATE UTILS
     private fun initWidget() {
         scoreHeartContainer = findViewById(R.id.score_heart_container)
         speakContainer = findViewById(R.id.speak_container)
@@ -137,8 +141,8 @@ class MainActivity : AppCompatActivity() {
     private fun openRewardPopup() {
         val intent = Intent(this, RewardFinishPopup::class.java)
         val bundle = Bundle()
-        bundle.putInt(KeyUtils.SEND_EXP_TO_REWARD_FINISH, score.toInt())
-        intent.putExtra(KeyUtils.PUT_EXP_BUNDLE, bundle)
+        bundle.putInt(CommunityKeyUtils.SEND_EXP_TO_REWARD_FINISH, score.toInt())
+        intent.putExtra(CommunityKeyUtils.PUT_EXP_BUNDLE, bundle)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
@@ -176,6 +180,8 @@ class MainActivity : AppCompatActivity() {
         startTimeUpCountWhenFirstSelect()
     }
 
+    /*
+    * Call when selected correct vocabulary*/
     private fun onSelectCorrect() {
         flipComponent.onSelectedCorrect = {
             if (currentId == it) {
@@ -184,7 +190,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
+    /*
+    * Event start only one to start time up progress
+    * */
     private fun startTimeUpCountWhenFirstSelect() {
         flipComponent.onSelected = {
             if (firstTime) {
@@ -194,7 +202,6 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-
     //endregion
 
 }

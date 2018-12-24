@@ -9,6 +9,8 @@ import labianlabs.tinhpt.rwenglish.R
 import labianlabs.tinhpt.rwenglish.localize
 
 class HomeActivity:AppCompatActivity(){
+
+    //region SYSTEM EVENTS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -18,11 +20,11 @@ class HomeActivity:AppCompatActivity(){
         setupView()
     }
 
-
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
     }
+    //endregion
 
     //region VIEW EVENTS
     private fun onStartClick(){
@@ -37,7 +39,6 @@ class HomeActivity:AppCompatActivity(){
         }
     }
     //endregion
-
 
     //region UTILS
     private fun mapView(){
