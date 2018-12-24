@@ -8,3 +8,4 @@ Continue = Continue;
 You have been %d exp = You have been %d exp;
 Time up = Time up;
 XP = XP;
+Version Demo 1.0.0 = Version Demo 1.0.0;

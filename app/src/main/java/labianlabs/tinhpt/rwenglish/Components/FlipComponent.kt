@@ -1,6 +1,7 @@
 package labianlabs.tinhpt.rwenglish.Components
 
 import android.content.Context
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +29,7 @@ class FlipComponent(context: Context) : View(context) {
     private fun setOnItemClick() {
         _flipView.setOnItemClickListener { parent, view, position, id ->
             if (currentPosition == position) {
-                currentPosition = -1
+                Log.e("POSITION",position.toString())
             } else {
                 currentPosition = position
                 if (currentId != datas.get(position).idWord) {

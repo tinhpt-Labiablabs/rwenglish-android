@@ -18,6 +18,12 @@ class HomeActivity:AppCompatActivity(){
         setupView()
     }
 
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
+
     //region VIEW EVENTS
     private fun onStartClick(){
         _btnStart.setOnClickListener {
@@ -38,11 +44,13 @@ class HomeActivity:AppCompatActivity(){
         _btnStart = findViewById(R.id.btn_start)
         _btnExit = findViewById(R.id.btn_exit)
         _tvTitle = findViewById(R.id.text_title)
+        _tvDemoVersion = findViewById(R.id.text_demo)
     }
     private fun setupView(){
         _btnStart.text = "Start".localize()
         _btnExit.text = "Exit".localize()
         _tvTitle.text = "Remember Word English \n The best for you".localize()
+        _tvDemoVersion.text = "Version Demo 1.0.0".localize()
     }
     //endregion
 
@@ -50,6 +58,7 @@ class HomeActivity:AppCompatActivity(){
     private lateinit var _tvTitle: TextView
     private lateinit var _btnStart: Button
     private lateinit var _btnExit: Button
+    private lateinit var _tvDemoVersion: TextView
     //endregion
 
 }

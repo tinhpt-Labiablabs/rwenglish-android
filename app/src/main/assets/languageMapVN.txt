@@ -8,3 +8,4 @@ Continue = Tiếp tục;
 You have been %d exp = Bạn đã nhận được %d điểm;
 Time up = Hết giờ;
 XP = Đ;
+Version Demo 1.0.0 = Phiên bản thử nghiệm 1.0.0;

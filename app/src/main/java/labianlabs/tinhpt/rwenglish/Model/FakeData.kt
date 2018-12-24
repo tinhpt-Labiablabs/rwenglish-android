@@ -14,7 +14,6 @@ class FakeData() {
         val v7 = Vocabulary("Pen", "Cây viết", 7, R.drawable.ic_pencil)
         val v8 = Vocabulary("Rulers", "Những cây thước", 8, R.drawable.ic_rules)
         return initializeDuplicateVocabulary(arrayListOf(v1,v2,v3,v4,v5,v6,v7,v8))
-
     }
 
     private fun initializeDuplicateVocabulary(data: List<Vocabulary>): MutableList<Vocabulary> {

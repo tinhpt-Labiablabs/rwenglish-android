@@ -8,6 +8,7 @@ import android.os.PersistableBundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.text.Spanned
+import android.util.Log
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
@@ -29,6 +30,12 @@ class RewardFinishPopup:AppCompatActivity(){
         receiveData()
         displayUI()
         onContinueClick()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+        Log.e("on Back Pressed","Cancel")
     }
     //endregion
 
