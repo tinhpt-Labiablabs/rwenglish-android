@@ -133,6 +133,7 @@ class MainActivity : AppCompatActivity() {
         alDialog.setCancelable(true)
         alDialog.setPositiveButton("OK".localize(), DialogInterface.OnClickListener { dialog, which ->
             finish()
+            dialog.dismiss()
         })
         alDialog.show()
 
@@ -144,6 +145,7 @@ class MainActivity : AppCompatActivity() {
         bundle.putInt(CommunityKeyUtils.SEND_EXP_TO_REWARD_FINISH, score.toInt())
         intent.putExtra(CommunityKeyUtils.PUT_EXP_BUNDLE, bundle)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+        infoPlayComponent.removeTimeUp()
         startActivity(intent)
     }
 

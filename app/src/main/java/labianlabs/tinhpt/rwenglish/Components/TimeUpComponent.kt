@@ -15,7 +15,7 @@ class TimeUpComponent(context: Context) : View(context) {
     //region UTILS
     fun createView(): View {
         val inflater: LayoutInflater = LayoutInflater.from(context)
-        _view = inflater.inflate(R.layout.heart_number_component,null) as LinearLayout
+        _view = inflater.inflate(R.layout.heart_number_component, null) as LinearLayout
         _progressTimeLeft = _view.findViewById(R.id.progress_time_left);
         _tvTimeUp = _view.findViewById(R.id.text_time_up)
         _tvTimeUp.text = "Time up".localize()
@@ -25,16 +25,17 @@ class TimeUpComponent(context: Context) : View(context) {
 
 
     fun updateView(isStart: Boolean) {
-        if (isStart){
+        if (isStart) {
             Thread(timeLeft).start()
-            timeLeft.onFinishProgress ={
+            timeLeft.onFinishProgress = {
                 onFinishTime!!.invoke()
             }
         }
     }
 
-    fun removeTimeUp(){
+    fun removeTimeUp() {
         timeLeft.destroy()
+
     }
     //endregion
 
@@ -44,40 +45,43 @@ class TimeUpComponent(context: Context) : View(context) {
     private lateinit var _progressTimeLeft: ProgressBar
     private lateinit var timeLeft: TimeLeft
 
-    var onFinishTime:(()->Unit)?= null
+    var onFinishTime: (() -> Unit)? = null
     //endregion
+
+}
 
     //region STATIC INNER CLASS
-    class TimeLeft: Runnable{
+class TimeLeft : Runnable {
+    var onFinishProgress: (() -> Unit)? = null
 
+    companion object {
         private lateinit var progress: ProgressBar
-        private  var handler = Handler()
-        var onFinishProgress: (()->Unit)? = null
+        private var handler = Handler()
 
-        companion object {
-            fun makeView(probgressBar: ProgressBar): TimeLeft{
-                return  TimeLeft().apply {
-                    this.progress = probgressBar
-                }
+        fun makeView(probgressBar: ProgressBar): TimeLeft {
+            return TimeLeft().apply {
+                progress = probgressBar
             }
         }
-
-        override fun run() {
-            for (i in 0..100){
-                Thread.sleep(500)
-                handler.post(Runnable {
-                    progress.progress = i
-                    if(i == 100){
-                        onFinishProgress?.invoke()
-                    }
-                })
-            }
-        }
-
-        fun destroy(){
-            handler.removeCallbacks(null)
-        }
-
     }
-    //endregion
+
+    override fun run() {
+        for (i in 0..100) {
+            Thread.sleep(500)
+            handler.post(Runnable {
+                progress.progress = i
+                if (i == 100) {
+                    onFinishProgress?.invoke()
+                }
+            })
+        }
+    }
+
+
+    fun destroy() {
+        onFinishProgress = null
+        handler.removeCallbacksAndMessages(null)
+    }
+
 }
+//endregion
