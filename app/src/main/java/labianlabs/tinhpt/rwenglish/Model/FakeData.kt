@@ -2,6 +2,7 @@ package labianlabs.tinhpt.rwenglish.Model
 
 import android.util.Log
 import labianlabs.tinhpt.rwenglish.R
+import java.util.*
 
 class FakeData() {
     fun createDatas(): List<Vocabulary> {
@@ -22,6 +23,7 @@ class FakeData() {
             dataFinal.add(vocabulary)
             dataFinal.add(cloneVocabulary(vocabulary))
         }
+        Collections.shuffle(dataFinal)
         return dataFinal
     }
 

@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun scoring() {
-        if (score < 100) {
+        if (score <= 100) {
             score += scoreAdd;
             updateScoreForInfoPlay(score.toInt());
         }
